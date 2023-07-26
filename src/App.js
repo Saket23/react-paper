@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import paper from "paper";
+import { useEffect, useRef } from "react";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const mycanvas = useRef(null);
+
+  useEffect(() => {
+    paper.install(window);
+    paper.setup(mycanvas.current);
+
+    const rect = new paper.Rectangle(
+      new paper.Point(50, 50),
+      new paper.Point(100, 100)
+    );
+
+    const path = new paper.Path.Rectangle(rect);
+    path.fillColor = new paper.Color(1, 0, 0.5);
+  }, []);
+
+  return <canvas ref={mycanvas}></canvas>;
 }
 
 export default App;
